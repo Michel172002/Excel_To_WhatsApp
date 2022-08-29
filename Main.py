@@ -7,8 +7,6 @@ from time import sleep
 # links e xpaths
 WPP_LINK = "https://web.whatsapp.com/"
 SEND_BUTTON = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[2]/button'
-START_CHAT = '//*[@id="action-button"]'
-USE_WEB_WPP = '//*[@id="fallback_block"]/div/div/h4[2]/a'
 INV_BUTTON = '//*[@id="app"]/div/span[2]/div/span/div/div/div/div/div/div[2]/div/div'
 
 driver = webdriver.Chrome()
