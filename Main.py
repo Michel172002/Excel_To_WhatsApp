@@ -2,16 +2,14 @@ import pandas as pd
 import selenium.common.exceptions
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 
 # links e xpaths
-
 WPP_LINK = "https://web.whatsapp.com/"
 SEND_BUTTON = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[2]/button'
 INV_BUTTON = '//*[@id="app"]/div/span[2]/div/span/div/div/div/div/div/div[2]/div/div'
 
-driver = webdriver.Chrome(ChromeDriverManager().install())
+driver = webdriver.Chrome()
 driver.get(WPP_LINK)  # abre o whatsapp. necessita autenticacao via QRCode
 sleep(20)
 
@@ -26,7 +24,7 @@ def send_message(numero, msg):
     # chama a api para enviar mensagem a um numero
     url = "https://web.whatsapp.com/send?phone={}&text={}"
     driver.get(url.format(numero, msg))
-    sleep(10)
+    sleep(20)
 
     #Verifica se o contato existe
     try:
@@ -37,6 +35,11 @@ def send_message(numero, msg):
     except selenium.common.exceptions.NoSuchElementException:
         #caso o numero não existe vai fechar a mensagem
         driver.find_element(By.XPATH, INV_BUTTON).click()
+
+    #escreve o numero no txt
+    txt = open("numeros.txt", "w")
+    txt.write(str(numero))
+    txt.close()
 
 
 # coloque o caminho do arquivo
